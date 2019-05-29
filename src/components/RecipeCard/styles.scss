@@ -1,0 +1,96 @@
+@mixin enable-transition {
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
+@mixin zoomFont($to) {
+  @include enable-transition;
+
+  .modalContainer-enter-active & {
+    font-size: $to;
+  }
+}
+
+.appearOnExpanded {
+  opacity: 0;
+
+  @include enable-transition;
+
+  .modalContainer-enter-active & {
+    opacity: 1;
+  }
+}
+
+.recipe {
+  border: 1px solid #8d8a8a;
+  border-radius: 5px;
+  margin-bottom: 16px;
+
+  cursor: pointer;
+
+  .header {
+    position: relative;
+    img {
+      max-width: 100%;
+    }
+    .action {
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin: 16px;
+      width: 32px;
+      height: 32px;
+      // opacity: 1;
+
+      // &:hover {
+      //   opacity: 1;
+      // }
+
+      @extend .appearOnExpanded;
+    }
+  }
+  .title {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin-bottom: 16px;
+    img {
+      width: 52px;
+      margin: 16px;
+    }
+    .cardTitle {
+      text-align: left;
+
+      h3 {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        @include zoomFont(32px);
+      }
+
+      span {
+        @include zoomFont(20px);
+      }
+    }
+  }
+
+  .text {
+    font-size: 16px;
+    text-align: justify;
+    margin: 16px;
+  }
+
+  .ingredient {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 16px;
+
+    .amount {
+      flex-grow: 0;
+      color: #54bc9e;
+      margin: 16px;
+      width: 52px;
+      font-size: 14px;
+      text-align: center;
+    }
+  }
+}
